@@ -1,0 +1,12 @@
+{
+	"name": "seahaven_syslog_alert_service",
+	"version": "0.1.0",
+	"author": "Dongsoo Kim <dongsoo.kim@gmail.com>",
+	"description": "Alert user when specific keyword appears in syslog event",
+	"license": "MIT",
+	"private": true,
+	"dependencies": {
+		"tail": "*",
+		"pushbullet": "*"
+	}
+}
