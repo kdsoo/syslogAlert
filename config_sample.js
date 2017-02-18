@@ -11,5 +11,6 @@ exports.logpath ={
 }
 
 exports.pushbullet = {
+	// get access token from pushbullet account setting page: https://www.pushbullet.com/#settings
 	key: ''
 }
