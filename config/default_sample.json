@@ -1,0 +1,16 @@
+{
+	"host": {
+	},
+	"logparser": {
+		"keywords": ["error", "EXT4", "[test]", "kernel"],
+		"separators": [" ", "\\+", "-", "\\(", "\\)", "\\*", "/", ":", "\\?", "\\[", "\\]"]
+	},
+	"logpath": {
+		"syslog": "/var/log/syslog"
+	},
+	"pushbullet": {
+		// get access token from pushbullet account setting page: https://www.pushbullet.com/#settings
+		"key": ''
+	}
+}
+

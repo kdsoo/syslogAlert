@@ -1,25 +1,22 @@
-var config = require('./config');
+var config = require('config');
+var debug = require('debug')('services:loghandler');
 Tail = require('tail').Tail;
-var syslog = config.logpath.syslog;
+var syslog = config.get("logpath.syslog");
 syslogHandler = new Tail(syslog);
-
-var PushBullet = require('pushbullet');
-var PBkey = config.pushbullet.key;
-var msgPusher = new PushBullet(PBkey);
-var allDevices = '';
+var events = require('./localEvents').Event;
 
 var os = require('os');
 var hostname = os.hostname();
 var sysinfo = "(OS: " + os.platform() + " (" + os.release() + "," + os.arch() + ")";
 
-var keywords = config.logparser.keywords;
-var separators = config.logparser.separators;
+var keywords = config.get("logparser.keywords");
+var separators = config.get("logparser.separators");
 
 function inspectLog(log) {
 	var tokens = log.split(new RegExp(separators.join('|'), 'g'));
 	var ret = false;
 
-	console.log("before for");
+	debug(tokens);
 	for (var i = 0; tokens.length; i++) {
 		for (var l = 0; l < keywords.length; l++) {
 			if (tokens[i] === keywords[l]) {
@@ -32,16 +29,14 @@ function inspectLog(log) {
 }
 
 syslogHandler.on("line", function(data) {
-	console.log(data);
+	debug(data)
 	if (inspectLog(data)) {
 		console.log("log event report");
-		msgPusher.devices(function(error, response) {
-			if (error) console.log("pusher error: " + error);
+		var message = {"title": "[syslog] " + hostname + sysinfo
+			+ " error occured", "body": data};
 
-			msgPusher.note(allDevices, hostname + sysinfo + " error occured", data, function(err, res) {
-				if (err) console.error(err);
-			});
-		});
+		// broadcast alert to be fetched by messaging services
+		events.emit("alert", message);
 	}
 });
 
@@ -49,4 +44,4 @@ syslogHandler.on("error", function(error) {
 	console.log('syslogHandler ERROR: ', error);
 });
 
-console.log("syslog alert service initiated");
+console.log("[ syslog handler initiated ]");

@@ -1,6 +1,7 @@
 node_modules/
 /config.json
 config.js
+config/default.json
 .DS_Store
 .project
 .settings/
