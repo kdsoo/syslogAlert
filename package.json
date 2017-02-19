@@ -6,6 +6,8 @@
 	"license": "MIT",
 	"private": true,
 	"dependencies": {
+		"config": "*",
+		"debug": "*",
 		"tail": "*",
 		"pushbullet": "*"
 	}
