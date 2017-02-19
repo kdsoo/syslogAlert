@@ -1,5 +1,7 @@
 # syslogAlert
 Simple log monitoring service which alerts user when registered keyword appears in syslog event.
+I leverage simple file based tailing to make this service more simple regarding some lightweight systems which do not run logging services with network sockets (like syslogd...udp 514)
+
 ## Key fetures
 ### Realtime syslog monitoring and alert
 This service supports tapping on syslog file and push alert to user accoding to a list of keyword registry.
