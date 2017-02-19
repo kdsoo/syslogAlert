@@ -32,3 +32,5 @@ cp config/default_sample.json config/default.json
 node index
 (I recommend to use pm2 to make syslogAlert always up while the system is running)
 ```
+Put keywords you want to keep heads up from your log file in realtime to the default.json configuration file.
+logparser.keywords is the placeholder for keywords you want to monitor.
