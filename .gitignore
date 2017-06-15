@@ -6,3 +6,4 @@ config/default.json
 .project
 .settings/
 *.sw*
+.vscode
