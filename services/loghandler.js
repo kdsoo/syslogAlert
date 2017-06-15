@@ -2,7 +2,7 @@ var config = require('config');
 var debug = require('debug')('services:loghandler');
 Tail = require('tail').Tail;
 var syslog = config.get("logpath.syslog");
-syslogHandler = new Tail(syslog);
+syslogHandler = new Tail(syslog, {useWatchFile: true});
 var events = require('./localEvents').Event;
 
 var os = require('os');
